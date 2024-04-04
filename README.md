@@ -45,6 +45,24 @@ NCSA has a new project to host LLMs that are directly compatible with the OpenAI
 ## 2. Azure OpenAI API
 Come see a hackathon organizer and we can provide Azure OpenAI API keys. These are generously subsidised by Microsoft Research. This has access to GPT-4 Turbo, etc. We only have the Azure version, not the regular OpenAI version.
 
+## 3. [UIUC.chat](https://www.uiuc.chat/) - RAG llm API 
+The UIUC.chat API allows you to upload many types of documents and chat with them. The API will return "answers that are grounded in your documents" much like [Perplexity.ai](https://www.perplexity.ai/).
+
+Please email me (kvday2@illinois.edu) if you have any questions or problems! Just a quick casual, email is great, low pressure.
+
+* UIUC.chat https://www.uiuc.chat/
+* API docs: https://docs.uiuc.chat/uiuc.chat-api/api-keys
+* Tutorial & highlights: https://www.youtube.com/watch?v=IIMCrIoz7LM&ab_channel=KastanDay
+
+**Usage:**
+
+![CleanShot 2024-04-04 at 15 37 54](https://github.com/rohan-uiuc/ncsa-hackathon-workflows/assets/13607221/63cb31ab-0e10-49d3-82d7-a5cbd05cb394)
+
+1. Make an account with your Illinois email.
+2. Create a new project by uploading documents
+3. This requires supplying an Azure OpenAI key (see above). Enter it on the **"Materials" page** under **Project-wide OpenAl key** before continuing.
+4. Try chatting with your documents on the website, then try via the API.
+
 ## 3. Anyscale Endpoints (3rd party)
 This is favorite LLM provider, they have a generous free tier, high rate limits, and leading-class features like function calling and json mode. 
 You'll have to create your own account. I recommend using the models `Mistral` and `Mixtral`.
