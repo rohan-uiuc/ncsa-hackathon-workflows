@@ -29,3 +29,6 @@
 5. DocVQA
    - massive dataset of visual docs for QA. https://rrc.cvc.uab.es/?ch=17&com=introduction
    - Can define some tasks based on this dataset
+  
+ 6. RE_MAT project
+    - https://github.com/re-mat/clowder-extractors/blob/main/experiment-from-excel/remat.experiment_from_excel.py
