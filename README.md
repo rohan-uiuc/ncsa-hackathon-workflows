@@ -5,7 +5,7 @@
  - Enron email dataset in kaggle https://www.kaggle.com/datasets/wcukierski/enron-email-dataset/data . 1.5GB dataset. Not a very clean dataset
  - Parse and clean dataset
  - Tasks :
-   a. Get the count of user sent emails per year and plot it
-   b. NetworkX graph from emails
-   c. RAG pipeline
-   d. Find the most important person and summarize all the emails
+   * Get the count of user sent emails per year and plot it
+   * NetworkX graph from emails
+   * RAG pipeline
+   * Find the most important person and summarize all the emails
