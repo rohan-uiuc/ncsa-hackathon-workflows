@@ -9,3 +9,22 @@
    * NetworkX graph from emails
    * RAG pipeline
    * Find the most important person and summarize all the emails
+
+  2. Letterbox dataset
+     - Letterboxd dataset is a more cleaner and elaborate IMDb dataset https://www.kaggle.com/datasets/gsimonx37/letterboxd/data
+     - Has posters (image data) and multiple csv tabular data
+     - Can devise some tasks that might combine multiple data?
+
+3. Kaggle dataset for computer vision
+   - https://www.kaggle.com/datasets?tags=13207-Computer+Vision
+   - Can pick one task. These datasets will need some preprocessing.
+
+4. Astronomical Image processing workflow
+   - Most astronomical deep-sky imagery needs some processing.
+   - Multiple images, filters, denoising.
+   - Pixinsight is a software that people use to process FITS images https://pixinsight.com/
+   - A youtube video on the workflow using Wolfram Language https://www.youtube.com/watch?v=lwnJubCJu-Q
+
+5. DocVQA
+   - massive dataset of visual docs for QA. https://rrc.cvc.uab.es/?ch=17&com=introduction
+   - Can define some tasks based on this dataset
