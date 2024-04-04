@@ -63,7 +63,7 @@ Please email me (kvday2@illinois.edu) if you have any questions or problems! Jus
 3. This requires supplying an Azure OpenAI key (see above). Enter it on the **"Materials" page** under **Project-wide OpenAl key** before continuing.
 4. Try chatting with your documents on the website, then try via the API.
 
-## 3. Anyscale Endpoints (3rd party)
+## 4. Anyscale Endpoints (3rd party)
 This is favorite LLM provider, they have a generous free tier, high rate limits, and leading-class features like function calling and json mode. 
 You'll have to create your own account. I recommend using the models `Mistral` and `Mixtral`.
 
