@@ -23,7 +23,8 @@
    - Most astronomical deep-sky imagery needs some processing.
    - Multiple images, filters, denoising.
    - Pixinsight is a software that people use to process FITS images https://pixinsight.com/
-   - A youtube video on the workflow using Wolfram Language https://www.youtube.com/watch?v=lwnJubCJu-Q
+   - LSST datasets, some tools and some tutorials https://github.com/lsst/dp0-2_lsst_io/tree/main
+   - European Org for Astronomical Research Data processing pipeline https://www.eso.org/sci/software/edps.html https://ftp.eso.org/pub/dfs/pipelines/libraries/edps/edps_tutorial0.9.pdf 
 
 5. DocVQA
    - massive dataset of visual docs for QA. https://rrc.cvc.uab.es/?ch=17&com=introduction
