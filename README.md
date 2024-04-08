@@ -1,5 +1,13 @@
-# Hackathon Starter Workflows
- A collection of example workflows to kickstart hackathon projects.
+# Welcome to the 2024 Ashby Prize in Computational Science Hackathon
+* [Hackathon general info website](https://ai.ncsa.illinois.edu/news-events/2024/03/2024-ashby-prize-in-computational-science-hackathon/)
+
+## Rules and Judging
+1. You can create anything you want but it **must involve computatoinal science**.
+2. You will be judgged primarially on innovation, inginuity and creativity, as well as the [other criteria mentioned here](https://ai.ncsa.illinois.edu/news-events/2024/03/2024-ashby-prize-in-computational-science-hackathon/) like your final oral presentation.
+
+
+# Example Hackathon Starter Workflows
+ A loose collection of example workflows to kickstart hackathon projects. Each of these are just starting points that need significant work and focus to make real.
 
  1. Enron dataset task
  - Enron email dataset in kaggle https://www.kaggle.com/datasets/wcukierski/enron-email-dataset/data . 1.5GB dataset. Not a very clean dataset
