@@ -205,8 +205,8 @@ if __name__ == "__main__":
 
     print(np.amin(diff),np.amax(diff),np.amin(aopt),np.amax(aopt))
 
-
     print("Time to fit {:d} image: {:.2f}".format(aopt.size,t1-t0))
 
+    # Process completed
     exit(0)
 

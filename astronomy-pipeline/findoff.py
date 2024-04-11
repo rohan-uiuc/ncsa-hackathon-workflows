@@ -409,8 +409,7 @@ if __name__ == "__main__":
     fout.close()    
 
     print("Total execution time: {:.2f} seconds".format(time.time()-t00))
-#
-#   Finally finished
-#
+
+    # Process completed
     exit(0)                    
     
