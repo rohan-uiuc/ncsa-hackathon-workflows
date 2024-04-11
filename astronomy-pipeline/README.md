@@ -26,5 +26,5 @@ Task is to find the offsets between two files.
 
 ## Acknowledgements
 1. Robert Gruendal
-2. Dark Energe Survey https://des.ncsa.illinois.edu/, https://github.com/DarkEnergySurvey/despyastro
+2. Dark Energy Survey https://des.ncsa.illinois.edu/, https://github.com/DarkEnergySurvey/despyastro
 
