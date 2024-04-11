@@ -6,8 +6,8 @@ Method to find offsets between images
 3. Read WCS info from tan_nwgint directory
 4. Use FITSIO (https://github.com/esheldon/fitsio) to read images
 5. Use WCS (https://github.com/DarkEnergySurvey/despyastro/blob/master/python/despyastro/wcsutil.py) to transform pixel coordinates between images
-6. Subtract images
-7. 
+6. Use sigma clipping to find median difference between two images
+7. Usage `python3 findoff.py -i "list/sci.g.list" -o "findoff_out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
 """
 
 import os
@@ -38,6 +38,21 @@ def get_data(filename,verbose=0):
 
 ###########################################
 def medclip(data,clipsig=5.0,maxiter=10,converge_num=0.0001,verbose=0):
+    """
+    Perform sigma clipping algorithm on the given dataset to robustly estimate its mean, median, and standard deviation.
+    Sigma clipping is a technique used to identify and remove outliers from data, which can skew statistical measures. 
+    The method iterates through the data, recalculating statistical measures each time and excluding data points that lie beyond a specified number of standard deviations (sigma) from the median. 
+    This process is repeated until convergence is achieved or a maximum number of iterations is reached. 
+    This method is useful in astronomical data analysis and other fields where it is important to mitigate the impact of outliers on statistical measures.
+    Args:
+        data (numpy.ndarray): The input data to be processed.
+        clipsig (float): The number of standard deviations to clip the data at.
+        maxiter (int): The maximum number of iterations to perform.
+        converge_num (float): The convergence criterion for the algorithm.
+        verbose (int): The verbosity level.
+    Returns:
+        tuple: A tuple containing the estimated mean, median, standard deviation, and the number of pixels used for the calculation.
+    """
     ct = data.size
     iter = 0; c1 = 1.0 ; c2 = 0.0
 
@@ -52,7 +67,8 @@ def medclip(data,clipsig=5.0,maxiter=10,converge_num=0.0001,verbose=0):
     if (verbose > 3):
         print("iter,avgval,medval,sig,ct,c1,c2")
         print(0,avgval,medval,sig,ct,c1,c2)
-
+    
+    # iterative clipping loop
     while (c1 >= c2) and (iter < maxiter):
         iter += 1
         lastct = ct
@@ -66,11 +82,11 @@ def medclip(data,clipsig=5.0,maxiter=10,converge_num=0.0001,verbose=0):
             c2 = converge_num * lastct
         if ((verbose > 2)and(verbose < 4)):
             print(iter,avgval,medval,sig)
-#        print ct,c1,c2
         if (verbose > 3):
             print(iter,avgval,medval,sig,ct,c1,c2)
 #   End of while loop
     if (iter >= maxiter):
+        # convergence warning
         print("Warning: medclip had not yet converged after {:d} iterations".format(iter))
 
     medval = np.median(data[wsm])
@@ -84,53 +100,51 @@ def medclip(data,clipsig=5.0,maxiter=10,converge_num=0.0001,verbose=0):
 
 ###########################################
 def med_diff(ImgDict,iImg,jImg,minpix=500,verbose=0):
+    """
+    Calculate the median difference between two images, accounting for the overlap region.
+    If there are not enough pixels to perform the calculation (fewer than minpix), 
+        it returns 0.0 for the median difference, 
+        -1 for the number of pixels, 
+        and -1.0 for the standard deviation as indicators of insufficient data.
+    Args:
+        ImgDict (dict): A dictionary containing the image data and metadata.
+        iImg (str): The name of the first image.
+        jImg (str): The name of the second image.
+        minpix (int): The minimum number of pixels required for the calculation.
+        verbose (int): The verbosity level.
+    Returns:
+        tuple: A tuple containing the median difference, standard deviation, and the number of pixels used for the calculation.
+    
+    Steps:
+    1. Read Image Data: Gets the image data from two images. This includes the images themselves along with their mask and weight maps.
+    2. Scale Images: The pixel values of both images are scaled by their respective flux scales found in ImgDict. This is necessary to ensure that the images are on the same flux scale for a fair comparison.
+    3. Reshape and Filter: The function reshapes the weight maps of the images to a 1D array and filters out pixels with a weight of 0.0, indicating bad or unreliable data.
+    4. Coordinate Transformation: It converts the pixel coordinates of the first image to sky coordinates (Right Ascension and Declination) using the WCS (World Coordinate System) information, and then transforms these sky coordinates back to pixel coordinates in the second image's frame. This step aligns the two images spatially, allowing for direct pixel-by-pixel comparison.
+    5. Calculate Differences: The function calculates the difference in pixel values between the two images for overlapping pixels (i.e., pixels that are within the bounds of both images and have non-zero weight in the second image).
+    6. Median Clipping: If the number of pixels with valid differences is greater than or equal to minpix, it performs a sigma clipping algorithm (using the medclip function) on the differences to robustly estimate the median difference, its standard deviation, and the number of pixels used in the calculation. This step helps to remove outliers and focus on the core distribution of pixel value differences.
+
+    """
 
     t0=time.time()
+    # read the two image data
     ih,isci,imsk,iwgt=get_data(iImg)
     jh,jsci,jmsk,jwgt=get_data(jImg)
     t1=time.time()
     if (verbose > 2):
         print("Read images: {:.2f} ".format(t1-t0))
-#
-#
+
     isci=isci*ImgDict[iImg]['fluxscale']
     jsci=jsci*ImgDict[jImg]['fluxscale']
     t1a=time.time()
     if (verbose > 2):
         print("Scale mages: {:.2f} ".format(t1a-t1))
 
-#    isci2=np.reshape(isci,isci.size)
     iwgt2=np.reshape(iwgt,iwgt.size)
     iwsm=np.where(iwgt2>0.0)
 
-#    jsci2=np.reshape(jsci,jsci.size)
-#    jwgt2=np.reshape(jwgt,jwgt.size)
     t2=time.time()
     if (verbose > 2):
         print("Reshape images: {:.2f} ".format(t2-t1a))
-
-#    nSubSample=32
-#
-##    inx=(ih['NAXIS1']-nSubSample)/nSubSample
-##    iny=(ih['NAXIS2']-nSubSample)/nSubSample
-##    iImg_ix=np.zeros([iny,inx],dtype=np.float64)
-##    iImg_iy=np.zeros([iny,inx],dtype=np.float64)
-##    for iy in range(iny):
-##        for ix in range(inx):
-##            iImg_ix[iy,ix]=(nSubSample/2) + ( ix * nSubSample )
-##            iImg_iy[iy,ix]=(nSubSample/2) + ( iy * nSubSample )
-#    inx=ih['NAXIS1']
-#    iny=ih['NAXIS2']
-#    iImg_ix=np.zeros([iny,inx],dtype=np.float64)
-#    iImg_iy=np.zeros([iny,inx],dtype=np.float64)
-#    for iy in range(iny):
-#        for ix in range(inx):
-#            iImg_ix[iy,ix]=ix
-#            iImg_iy[iy,ix]=iy
-##    iImg_ix=np.reshape(iImg_ix,iImg_ix.size)[iwsm]
-##    iImg_iy=np.reshape(iImg_iy,iImg_iy.size)[iwsm]
-#    iImg_ix=np.reshape(iImg_ix,iImg_ix.size)
-#    iImg_iy=np.reshape(iImg_iy,iImg_iy.size)
 
     iImg_iy, iImg_ix = np.indices(isci.shape)
 #   remove points that are masked (have wgt=0)
@@ -171,28 +185,11 @@ def med_diff(ImgDict,iImg,jImg,minpix=500,verbose=0):
     i_ix=iImg_ix[jwsm]
     i_iy=iImg_iy[jwsm]
 
-#    for i in range(0,j_ix.size,57):
-#        print(" {:8d}   {:4d} {:4d}   {:4d} {:4d}  {:10.3f} {:10.3f} {:15.7f} ".format(i,i_ix[i],i_iy[i],j_ix[i],j_iy[i],isci[i_iy[i],i_ix[i]],jsci[j_iy[i],j_ix[i]],jwgt[j_iy[i],j_ix[i]]))
-
     diff=isci[i_iy,i_ix]-jsci[j_iy,j_ix]
     dwgt=jwgt[j_iy,j_ix]
     dwsm=np.where(dwgt>0)
 
-#    print(diff)
-#    print(diff[dwsm])
-
     MedPix=diff[dwsm].size
-#    if (MedPix >= minpix):
-#        MedDiff=np.median(diff[dwsm])
-#        MedStd=np.std(diff[dwsm])
-#    else:
-#        MedDiff=0.0
-#        MedPix=-1
-#        MedStd=-1.0
-#    t6=time.time()
-#    if (verbose > 0):
-#        if (MedPix >= minpix):
-#            print("Final values (npix,med_diff,med_std,timing): {:8d} {:12.5f} {:12.5f} {:6.2f}".format(MedPix,MedDiff,MedStd,(t6-t0)))
 
     if (MedPix >= minpix):
         mdiffval=diff[dwsm]
@@ -206,63 +203,7 @@ def med_diff(ImgDict,iImg,jImg,minpix=500,verbose=0):
         MedPix=-1
         MedStd=-1.0
     
-
-#    for i in range(iImg_ix[jwsm].size):
-#        print(i,iImg_ix[jwsm][i],iImg_iy[jwsm][i],jImg_ix[jwsm][i],jImg_iy[jwsm][i])
-#        ra=numpy.reshape(BleedImg[Img]['ra'],BleedImg[Img]['ra'].size)
-#        dec=numpy.reshape(BleedImg[Img]['dec'],BleedImg[Img]['ra'].size)
-#        x,y=WCSDict[Tile][Img]['wcs'].sky2image(ra,dec)
-#        BleedImg[Img]['x']=numpy.reshape(x,numpy.shape(BleedImg[Img]['ra']))
-#        BleedImg[Img]['y']=numpy.reshape(y,numpy.shape(BleedImg[Img]['ra']))
-
     return MedDiff,MedStd,MedPix
-
- 
-################################################
-def getoff(x,*p):
-
-    print("#################")
-    y=np.zeros((x.size),dtype=np.float64)
-    nfile=len(p)
-    tol=0.001
-    for i in range(x.size-1):
-        cnt=x[i]
-        ifv=1
-        ncnt=nfile-1
-        ii=0
-        jj=0
-        while (ii == 0):
-            mark=float(ncnt)+tol
-            if (cnt <= mark):
-                ii=ifv
-                jj=int(ifv+round(cnt))
-            else:
-                ifv=ifv+1
-                cnt=cnt-float(ncnt)
-                ncnt=ncnt-1
-#        print i,x[i],ii,jj,xifl[i],xjfl[i]
-        y[i]=p[jj-1]-p[ii-1]
-
-    return y
-
-
-################################################
-def getoff2(x,*p):
-#    print("#################")
-#    y=np.zeros((x.size),dtype=np.float64)
-#    for i in range(x.size):
-##        ii=xifl[i]
-##        jj=xjfl[i]
-#        y[i]=p[xjfl[i]]-p[xifl[i]]
-    y=np.array([p[xjfl[i]]-p[xifl[i]] for i in range(x.size)])
-    return y
-
-################################################
-def getoff3(x,*p):
-    print("#################")
-    y=p[xjfl]-p[xifl]
-
-    return y
 
 
 ################################################
@@ -294,9 +235,10 @@ if __name__ == "__main__":
     # read image list
     for line in f:
         cols=line.split()
-        fname0=cols[0]
-        fname=re.sub("coadd_nwgint","tan_nwgint",fname0)  # just to match the filenames in tan_nwgint directory correctly
-        fname=re.sub("_nwgint.fits","_nwgint_tan.fits",fname)
+        fname0=re.sub(r"\[0\]","",cols[0])
+        if (args.useTAN):
+            fname=re.sub("coadd_nwgint","tan_nwgint",fname0)  # just to match the filenames in tan_nwgint directory correctly
+            fname=re.sub("_nwgint.fits","_nwgint_tan.fits",fname)
         flist.append(fname)
         fdict[fname]={}
         fdict[fname]['inum']=i
@@ -328,7 +270,7 @@ if __name__ == "__main__":
         i2=0
         for line in f_flux:
             cols=line.split()
-            fname=re.sub("\[0\]","",cols[0])
+            fname=re.sub(r"\[0\]","",cols[0])
             if (useFluxScale):
                 fscale=float(cols[1])
             else:
@@ -372,7 +314,7 @@ if __name__ == "__main__":
                 fdict[Img]['ra_size']=ih['RACMAX']-ih['RACMIN']
                 fdict[Img]['dec_size']=ih['DECCMAX']-ih['DECCMIN']
             fdict[Img]['wcs']=wcsutil.WCS(ih)
-            print("Read WCS for {:s} will be using a fluxscale of {:.5f} ".format(Img,fdict[Img]['fluxscale']))
+            #print("Read WCS for {:s} will be using a fluxscale of {:.5f} ".format(Img,fdict[Img]['fluxscale']))
         else:
             print("File: {:s} not found.".format(Img))
             file_missing=True
@@ -382,14 +324,18 @@ if __name__ == "__main__":
     ts1=time.time()
     print("Timing (acquire WCS): {:.2f}".format(ts1-ts0))
 
+    # identify which image pairs have overlapping regions
     nimg=len(flist)
-    imatch=np.zeros((nimg,nimg),dtype='int16')
-    zoff=np.zeros((nimg,nimg),dtype='double')
+    imatch=np.zeros((nimg,nimg),dtype='int16')  # store information about whether pairs of images overlap (1 = overlap, 0 = no overlap)
+ 
     for iImg in flist:
         for jImg in flist:
             if (iImg == jImg):
                 imatch[fdict[iImg]['inum'],fdict[jImg]['inum']]=0
             else:
+                # checks if either image has a CROSSRA0 flag set to "Y". 
+                # This flag indicates that the image crosses the 0 or 360-degree line in Right Ascension (RA), which is a special case for overlap calculation.
+                # The code adjusts RA values accordingly to handle this case.
                 if ((fdict[iImg]['crossra0'] == "Y")or(fdict[jImg]['crossra0'] == "Y")):
                     print("Either {:s} or {:s} or both have CROSSRA0 == Y".format(iImg,jImg))
                     ra1=fdict[iImg]['ra_cent']
@@ -405,6 +351,8 @@ if __name__ == "__main__":
                     printf("  {:12.7f}  ".format(dra))
                 else:
                     dra=fdict[iImg]['ra_cent']-fdict[jImg]['ra_cent']
+                # overlap calculation
+                # calculate the difference in RA and Declination (Dec) centers between the two images (dra and ddec) and compute the average sizes in RA and Dec for the images (ra_size and dec_size).
                 ddec=fdict[iImg]['dec_cent']-fdict[jImg]['dec_cent']
                 ra_size=0.5*(fdict[iImg]['ra_size']+fdict[jImg]['ra_size'])
                 dec_size=0.5*(fdict[iImg]['dec_size']+fdict[jImg]['dec_size'])
@@ -412,10 +360,12 @@ if __name__ == "__main__":
                     print("dr={:12.7f} dd={:12.7f} rs={:12.7f} ds={:12.7f} ".format(dra,ddec,ra_size,dec_size))                    
                 OverLap=False
                 OverLapStr="NoOverlap"
+                # Images overlap if the absolute differences in RA and Dec are less than the average sizes
                 if ((abs(dra) < ra_size)and(abs(ddec) < dec_size)):
                     OverLap=True
                     OverLapStr="  Overlap"
                     imatch[fdict[iImg]['inum'],fdict[jImg]['inum']]=1
+                # verbose output
                 if (args.verbose > 3):
                     print("{ovstr:9s}: {r1:12.7f} {r2:12.7f} {d1:12.7f} {d2:12.7f} ".format(
                         ovstr=OverLapStr,
@@ -429,7 +379,7 @@ if __name__ == "__main__":
                         d1=fdict[jImg]['header']['DECCMIN'],
                         d2=fdict[jImg]['header']['DECCMAX']))
 
-    print(imatch)
+    #print(imatch)
     
     fout=open(args.output,'w')
     for iImg in flist:
@@ -438,6 +388,7 @@ if __name__ == "__main__":
             fname=fdict[iImg]['fname0']))
     fout.write("END OF FILELIST\n")
 
+    # loop over all image pairs and write output to file
     count=1
     for iImg in flist:
         for jImg in flist:
