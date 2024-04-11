@@ -23,7 +23,7 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 ## Usage
 1. `python3 findoff.py -i "list/sci.g.list" -o "out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
 2. `python3 fitoff.py -i "out/test.g.offset_b8" -o "out/test.g.zoff_b8" -b -v 2`
-3. `python3 zoff_apply.py -i "findoff_out/test.g.zoff_b8" --fluxscale "list/flx.g.list" -o "out"`  ( not working as WGT_ME tags are not present in FITS images.)
+3. `python3 zoff_apply.py -i "out/test.g.zoff_b8" --fluxscale "list/flx.g.list" -o "out"`  ( not working as WGT_ME tags are not present in FITS images.)
 
 ## Useful info
 1. Astropy.org (https://www.astropy.org/)
