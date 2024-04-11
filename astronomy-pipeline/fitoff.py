@@ -192,6 +192,8 @@ if __name__ == "__main__":
     chisq /= (x.size - aopt2.size)
     print(chisq)
 
+    # write results to file
+    # Write filename and the optimized offset
     fout=open(args.output,'w')
     for i in range(aopt.size):
         if (i < 190):
