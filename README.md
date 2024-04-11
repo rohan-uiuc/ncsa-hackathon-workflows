@@ -47,6 +47,7 @@
       * Convert the notebook to a workflow description that can be executed on Delta.
       * Modify the workflow so that more steps can be run in parallel (for example, the clustering steps).
       * Find the optimal number of clusters for the clustering steps.
+      * Explore alternative algorithms for clustering and feature selection.
 
 # Accessing LLMs 
 
