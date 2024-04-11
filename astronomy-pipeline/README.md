@@ -7,6 +7,9 @@ The goal of the process is to remove residual background light from the images (
 `fitoff.py` is taking the differences among all the overlapping images (from findoff) and calculating the best offset value to add/subtract to the pixel values in each image
 `zoff_apply.py` is taking the values found in fitoff and then applying them to the original images.
 
+This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..335R/abstract
+
+
 ## Requirements
 - Python 3.12+
 - pip
