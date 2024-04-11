@@ -25,7 +25,7 @@ def getoff(x,*p):
 
 ################################################
 if __name__ == "__main__":
-    # usage `python3 fitoff.py -i "findoff_out/test.g.offset_b8" -o "findoff_out/test.g.zoff_b8" -b -v 2`
+    # usage `python3 fitoff.py -i "out/test.g.offset_b8" -o "out/test.g.zoff_b8" -b -v 2`
     parser = argparse.ArgumentParser(description='Code to take offset measurement and find optimal set of per image offsets for the ensemble') 
 
     parser.add_argument('-i','--input',   action='store', type=str, default=None, required=True,  help='Input offset (pair) measurements from findoff_WCS.')

@@ -208,7 +208,7 @@ def med_diff(ImgDict,iImg,jImg,minpix=500,verbose=0):
 
 ################################################
 if __name__ == "__main__":
-    # usage `python3 findoff.py -i "list/sci.g.list" -o "findoff_out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
+    # usage `python3 findoff.py -i "list/sci.g.list" -o "out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
     t00=time.time()
     parser = argparse.ArgumentParser(description='Code to take offset measurement and find optimal set of per image offsets for the ensemble') 
 
