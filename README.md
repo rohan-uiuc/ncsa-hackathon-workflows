@@ -40,7 +40,13 @@
   
  6. RE_MAT project
     - https://github.com/re-mat/clowder-extractors/blob/main/experiment-from-excel/remat.experiment_from_excel.py
-
+   
+ 7. Computational genomics
+    - The notebook at https://colab.research.google.com/drive/1YoVUzH7251VAzCoG3uXLSetfZ-W60gaw steps users through a simplified version of "Case Study 1" from https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000583.
+    - Tasks:
+      * Convert the notebook to a workflow description that can be executed on Delta.
+      * Modify the workflow so that more steps can be run in parallel (for example, the clustering steps).
+      * Find the optimal number of clusters for the clustering steps.
 
 # Accessing LLMs 
 
