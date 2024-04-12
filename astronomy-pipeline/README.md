@@ -9,6 +9,13 @@ The goal of the process is to remove residual background light from the images (
 
 This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..335R/abstract
 
+## Data
+- List of images in `list` directory. Basically some text files.
+- Fluxscale values are in files named `flx`
+- Weight values are in files named `wgt`
+- Files after swarp are named `sci`
+- FITS images in `tan_nwgint` directory. Use DS9 to view the images
+- The current scripts process 5 light bands / colors : g,i,r,Y, and z. 
 
 ## Requirements
 - Python 3.12+
