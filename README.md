@@ -3,7 +3,7 @@
 
 ## Rules and Judging
 1. You can create anything you want but it **must involve computatoinal science**.
-2. You will be judgged primarially on innovation, inginuity and creativity, as well as the [other criteria mentioned here](https://ai.ncsa.illinois.edu/news-events/2024/03/2024-ashby-prize-in-computational-science-hackathon/) like your final oral presentation.
+2. You will be judged primarially on innovation, inginuity and creativity, as well as the [other criteria mentioned here](https://ai.ncsa.illinois.edu/news-events/2024/03/2024-ashby-prize-in-computational-science-hackathon/) like your final oral presentation.
 
 
 # Example Hackathon Starter Workflows
