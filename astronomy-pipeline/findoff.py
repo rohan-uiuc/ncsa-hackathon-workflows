@@ -7,7 +7,7 @@ Method to find offsets between images
 4. Use FITSIO (https://github.com/esheldon/fitsio) to read images
 5. Use WCS (https://github.com/DarkEnergySurvey/despyastro/blob/master/python/despyastro/wcsutil.py) to transform pixel coordinates between images
 6. Use sigma clipping to find median difference between two images
-7. Usage `python3 findoff.py -i "list/sci.g.list" -o "findoff_out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
+7. Usage `python3 findoff.py -i "data/list/sci.g.list" -o "out/test.g.offset_b8" -v 1 --useTAN --fluxscale "data/list/flx.g.list"`
 """
 
 import os
