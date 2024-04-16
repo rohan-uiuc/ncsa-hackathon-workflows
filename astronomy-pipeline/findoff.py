@@ -127,8 +127,8 @@ def med_diff(ImgDict,iImg,jImg,minpix=500,verbose=0):
 
     t0=time.time()
     # read the two image data
-    ih,isci,imsk,iwgt=get_data(iImg)
-    jh,jsci,jmsk,jwgt=get_data(jImg)
+    ih,isci,imsk,iwgt=get_data(os.path.join("data",iImg))
+    jh,jsci,jmsk,jwgt=get_data(os.path.join("data",jImg))
     t1=time.time()
     if (verbose > 2):
         print("Read images: {:.2f} ".format(t1-t0))
@@ -301,8 +301,8 @@ if __name__ == "__main__":
     file_missing=False
     ts0=time.time()
     for Img in flist:
-        if (os.path.isfile(Img)):
-            ih,isci,imsk,iwgt=get_data(Img)
+        if (os.path.isfile(os.path.join("data",Img))):
+            ih,isci,imsk,iwgt=get_data(os.path.join("data",Img))
             fdict[Img]['header']=ih
             fdict[Img]['crossra0']=ih['CROSSRA0']
             fdict[Img]['ra_cent']=ih['RA_CENT']
