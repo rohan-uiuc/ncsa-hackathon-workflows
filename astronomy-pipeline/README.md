@@ -14,7 +14,7 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 - Fluxscale values are in files named `flx`
 - Weight values are in files named `wgt`
 - Files after SWarp (another process not part of the pipeline) are named `sci`
-- FITS images in `tan_nwgint` directory. Use DS9 to view the images
+- FITS images in `tan_nwgint` and `coadd` directory. Use DS9 to view the images
 - Data contains images for bands i and r.
 - The current scripts can process 5 light bands / colors : g,i,r,Y, and z. 
 
@@ -40,6 +40,7 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 - FITS files (https://docs.astropy.org/en/latest/io/fits/index.html)
 - Use DS9 to view the FITS files (https://sites.google.com/cfa.harvard.edu/saoimageds9/download)
 - SWarp program (https://www.astromatic.net/software/swarp/, https://github.com/astromatic/swarp)
+- Coadd (https://wiki.eigenvector.com/index.php?title=Coadd)
 - World Coordinate System (https://docs.astropy.org/en/latest/wcs/index.html)
 
 ## Acknowledgements
