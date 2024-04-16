@@ -13,9 +13,10 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 - List of images in `list` directory. Basically some text files.
 - Fluxscale values are in files named `flx`
 - Weight values are in files named `wgt`
-- Files after swarp are named `sci`
+- Files after SWarp (another process not part of the pipeline) are named `sci`
 - FITS images in `tan_nwgint` directory. Use DS9 to view the images
-- The current scripts process 5 light bands / colors : g,i,r,Y, and z. 
+- Data contains images for bands i and r.
+- The current scripts can process 5 light bands / colors : g,i,r,Y, and z. 
 
 ## Requirements
 - Python 3.12+
@@ -28,14 +29,16 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 
 
 ## Usage
-1. `python3 findoff.py -i "list/sci.g.list" -o "out/test.g.offset_b8" -v 1 --useTAN --fluxscale "list/flx.g.list"`
-2. `python3 fitoff.py -i "out/test.g.offset_b8" -o "out/test.g.zoff_b8" -b -v 2`
-3. `python3 zoff_apply.py -i "out/test.g.zoff_b8" --fluxscale "list/flx.g.list" -o "out"`  ( not working as WGT_ME tags are not present in FITS images.)
+1. Activate virtual env
+2. `python3 findoff.py -i "data/list/sci.i.list" -o "out/test.i.offset_b8" -v 1 --useTAN --fluxscale "data/list/flx.i.list"`
+3. `python3 fitoff.py -i "out/test.i.offset_b8" -o "out/test.i.zoff_b8" -b -v 2`
+4. `python3 zoff_apply.py -i "out/test.i.zoff_b8" --fluxscale "data/list/flx.i.list" -o "out/"`  
 
 ## Useful info
 - Astropy.org (https://www.astropy.org/)
 - FITS files (https://docs.astropy.org/en/latest/io/fits/index.html)
 - Use DS9 to view the FITS files (https://sites.google.com/cfa.harvard.edu/saoimageds9/download)
+- SWarp program (https://www.astromatic.net/software/swarp/, https://github.com/astromatic/swarp)
 - World Coordinate System (https://docs.astropy.org/en/latest/wcs/index.html)
 
 ## Acknowledgements
