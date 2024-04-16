@@ -24,8 +24,9 @@ This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..3
 
 ## Installation
 1. Clone the repository
-2. Install the requirements
-3. Run the pipeline
+2. Create virtual environment
+3. Install the requirements
+4. Run the pipeline
 
 
 ## Usage
