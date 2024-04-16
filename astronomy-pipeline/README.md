@@ -10,6 +10,7 @@ The goal of the process is to remove residual background light from the images (
 This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..335R/abstract
 
 ## Data
+- Download data from shared GDrive https://drive.google.com/drive/folders/1mT5QSrH1sv20HYG2P7HDP9L1-KveDJmX
 - List of images in `list` directory. Basically some text files.
 - Fluxscale values are in files named `flx`
 - Weight values are in files named `wgt`
