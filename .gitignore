@@ -28,10 +28,40 @@ share/python-wheels/
 MANIFEST
 .DS_Store
 
-# data
-data
+
+# python binaries
+*.pyc
+bin/
+/*/bin
+.cache/
+
+# virtual environment
+venv
+
+# vim swap files
+*.swp
+
+# IDEA:
+.idea/*
+**.iml
+**.iml
+
+# setup and build
+**/build/
+**/dist/
+
+# VSCODE
+.vscode
+
+# IDEA - generated artifacts
+**/out/
+
+# Apple metadata
+**/.DS_Store
+
+# zip data files
+/**.zip
 data*
 # output folder
 output
 out 
-
