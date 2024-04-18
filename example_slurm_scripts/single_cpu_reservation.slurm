@@ -6,7 +6,7 @@
 #SBATCH --time=00:30:00        # total run time limit (HH:MM:SS)
 #SBATCH --nodes=1              # node count
 #SBATCH --mem=0
-#SBATCH --reservation=hack-cpu-team1    # reservation available starting from 8AM 4/20 and ending 11PM 4/21.
+#SBATCH --reservation=hack-cpu-team<num>    # Change <num> to your team number. Eg 1, 2, 10, 12. Reservation available starting from 8AM 4/20 and ending 11PM 4/21.
 
 conda activate venv
 
