@@ -48,6 +48,6 @@ Do not hard code the band (i,r) - all the scripts should run for all bands prese
 - World Coordinate System (https://docs.astropy.org/en/latest/wcs/index.html)
 
 ## Acknowledgements
-- Robert Gruendl
+- Robert Gruendl, Sr. Research Scientist, NCSA.
 - Dark Energy Survey https://des.ncsa.illinois.edu/, https://github.com/DarkEnergySurvey/despyastro
 
