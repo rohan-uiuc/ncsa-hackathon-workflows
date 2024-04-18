@@ -22,7 +22,7 @@ You will just need to reaplce runnable script (instead of `llm.py`) and conda en
 ## Usage
 - `sinfo` to check the partitions. 
 - `sbatch single_node.slrum` to submit batch jobs.
-- `srun --account=bbug-delta-cpu --pty /bin/bash` to submit interactive jobs.
+- `srun --account=bbug-delta-cpu --cpus-per-task=8 --pty /bin/bash` to submit interactive jobs.
 - Once submitted, you will get a response mentioning the compute node name(s) scheduled for the job.
 
 ## Batch job submissions
