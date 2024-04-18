@@ -36,6 +36,7 @@
 
 5. Astronomical Image processing workflow
    - Most astronomical deep-sky imagery needs some processing.
+   - Checkout [astronomical-pipeline](https://github.com/rohan-uiuc/ncsa-hackathon-workflows/tree/main/astronomy-pipeline) directory in this repo for a working pipeline and related tasks
    - LSST datasets, some tools and some tutorials https://github.com/lsst/dp0-2_lsst_io/tree/main
    - European Org for Astronomical Research Data processing pipeline https://www.eso.org/sci/software/edps.html https://ftp.eso.org/pub/dfs/pipelines/libraries/edps/edps_tutorial0.9.pdf 
 
