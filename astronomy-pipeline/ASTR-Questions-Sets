@@ -1,19 +1,104 @@
-Astronomy Question Sets 
-
 # Astronomy Question Sets
 
 ## Overview
 This is a list of questions for varying difficulty to attempt with your AI system. Some questions require access to online databases, and others to static text files. 
 Some of these concepts can be rather intensive into astronomy - after all, AI has proven to be pretty good so we want to try to challenge it!
 
-1. `findoff.py` is comparing the area of overlap between each image and calculating the median difference.
-2. `fitoff.py` is taking the differences among all the overlapping images (from findoff) and calculating the best offset value to add/subtract to the pixel values in each image
-3. `zoff_apply.py` is taking the values found in fitoff and then applying them to the original images.
-4. Output of `zoff_apply` is a FITS file that can be viewed using DS9.
-5. Read the documentation within the scripts to see what processes are being done in each.
-6. The pipeline : for each band (i,r), run `findoff.py`. using the output from `findoff`, run `fitoff` and using the output from `fitoff`, run `zoff_apply` 
+TASK FOR HACKATHON:
+Find answers for the following questions and subsets. 
 
-This method is based on paper https://ui.adsabs.harvard.edu/abs/1995ASPC...77..335R/abstract
+## Question #1: Molecular Tracers
+Acknowledge Reference Source: 
+
+Prompt your code to return all equations in LaTeX:
+
+Derive a definition of the critical density, and use it to compute some critical densities for important molecular transitions.
+For the purposes of this problem, you will need to know some basic parameters (such as energy levels and Einstein coefficients) of common interstellar molecules. 
+You can obtain these from the Leiden Atomic and Molecular Database https://home.strw.leidenuniv.nl/~moldata/.
+
+1a. Consider an excited state "i" of some molecule, and let A_{ij} and k_{ij} be the Einstein A coefficient and the collision rate, respectively, for transitions from state i to state j. 
+Return the LaTeX equation expressions for the rates of spontaneous radiative and collisional de-excitations out of state i in a gas where the number density of collision partners is n.
+
+Answer 1a (LaTeX): 
+    
+The radiative de-excitation rate is
+\begin{displaymath}
+\left(\frac{dn_i}{dt}\right)_{\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} .
+\end{displaymath}
+
+The collisional de-excitation rate is
+\begin{displaymath}
+\left(\frac{dn_i}{dt}\right)_{\rm coll.} = -n n_i \sum_{j<i} k_{ij}.
+\end{displaymath}
+
+
+1b. Define the critical density n_crit of a state as the density for which the spontaneous radiative and collisional de-excitation rates are equal. 
+There is some ambiguity in this definition.
+Some people define the critical density as the density for which the rate of radiative de-excitation equals the rate of all collisional transitions out of a state, not just the rate of collisional de-excitations out of it. In practice this usually makes little difference. Using your answer to the previous part, derive an expression for n_crit in terms of the Einstein coefficient and collision rates for the state. 
+
+Answer 1b:
+
+Setting the results from the previous part equal and solving, we obtain:
+    
+\begin{displaymath}
+ n_i \sum_{j<i} A_{ij} = n_{\rm crit} n_i \sum_{j<i} k_{ij} 
+ \qquad \Longrightarrow \qquad
+ n_{\rm crit} = \frac{\sum_{j<i} A_{ij}}{\sum_{j<i} k_{ij}}.
+ \end{displaymath}
+
+
+1c. When a state has a single downward transition that is far more common than any other one, as is the case for example for the rotational excitation levels of CO, it is common to refer to the critical density of the upper state of the transition as the critical density of the line. Compute critical densities for the following lines: CO J=1→0, CO J=3→2, CO J=5→4, and HCN J=1→0, using H2 as a collision partner. 
+    Perform your calculation for the most common isotopes: C^12, O^16, and N^14. Assume the gas temperature is 10 K, the H2 molecules are all para-H2, and neglect hyperfine splitting.
+
+Answer 1c: 
+   
+Using numbers taken from the \href{http://www.strw.leidenuniv.nl/~moldata}{LAMBDA} website\footnote{Collision rates are
+sufficiently uncertain that the rate coefficients listed in the
+database are periodically updated as new calculations or experiments
+are performed. The numerical values given here were computed using
+collision rate coefficients retrieved on 10 August 2016.} for the $A_{ij}$ and $k_{ij}$ values, we have
+\begin{center}
+\begin{tabular}{c|c}
+Line & $n_{\rm crit}$ [cm$^{-3}$] \\ \hline
+CO($J=1\rightarrow 0$) & $2.2\times 10^3$ \\
+CO($J=3\rightarrow 2$) & $1.9 \times 10^4$ \\
+CO($J=5\rightarrow 4$) & $7.8\times 10^4$ \\
+HCN($J=1\rightarrow 0$) & $1.0\times 10^6$
+\end{tabular}
+\end{center}
+
+1d. Consider a molecular cloud in which the volume-averaged density is n=100 cm^-3. Assuming the cloud has a lognormal density distribution as given by equation (\ref{eq:denpdf}), with a dispersion σ_s^2 = 5.0, compute the fraction of the cloud mass that is denser than the critical density for each of these transitions. Which transitions are good tracers of the bulk of the mass in a cloud?
+Which are good tracers of the denser, and thus presumably more actively star-forming, parts of the cloud?
+
+
+Answer 1d: 
+    
+The fraction of the mass above some specified density $\rho_c$ can be obtained by integrating the PDF for mass:
+\begin{equation}
+f_M(\rho > \rho_0) = \frac{\int_{s_c}^\infty p_M(s) \, ds}{\int_{-\infty}^{\infty} p_M(s) \, ds}
+\end{equation}
+where $s_c = \ln(\rho_c/\overline{\rho})$ and the mass PDF is
+\begin{equation}
+p_M = \frac{1}{\sqrt{2\pi \sigma_s^2}} \exp\left[-\frac{(s+s_0)^2}{2\sigma_s^2}\right]
+\end{equation}
+with $s_0 = -\sigma_s^2/2$. Using the critical densities obtained in the previous part to compute $s_c$, and then to evaluate the integral, we obtain
+\begin{center}
+\begin{tabular}{c|c|c}
+Line & $s_c$ & $f_M(n>n_{\rm crit})$ \\ \hline
+CO($J=1\rightarrow 0$) & $3.1$ & 0.39 \\
+CO($J=3\rightarrow 2$) & $5.2$ & 0.11 \\
+CO($J=5\rightarrow 4$) & $6.6$ & 0.032 \\
+HCN($J=1\rightarrow 0$) & $9.2$ & $0.0013$
+\end{tabular}
+\end{center}
+It appears that CO($J=1\rightarrow 0$) and (to some extent) CO($J=3\rightarrow 2$) are good tracers of the bulk of the mass, while CO($J=5\rightarrow 4$) and HCN($J=1\rightarrow 0$) are better tracers of the denser parts of the cloud.
+
+
+
+
+
+
+
 
 ## Task for the hackathon
 - Develop a workflow agent that takes in the input directory, checks if required files are present, creates the code for the pipeline, executes it and prompts user when a result is generated.
