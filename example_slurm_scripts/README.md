@@ -42,5 +42,5 @@ Use `srun` for interactive jobs. This means you use specific options with srun o
 - This will give you shell access to the compute node
 
 ### Single node with GPU reservation
-- `srun --account=bbug-delta-gpu --partition=A100x4 --time=00:30:00 --nodes=1 --mem=0 python test.py`
+- `srun --account=bbug-delta-gpu --partition=A100x4 --time=00:30:00 --nodes=1 --gpus-per-node=1 --mem=0 python test.py`
 
