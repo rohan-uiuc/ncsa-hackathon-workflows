@@ -34,10 +34,10 @@ You will just need to reaplce runnable script (instead of `llm.py`) and conda en
 6. single_gpu_reservation : As long as the paritition is `A100x4` and account is `bbug-delta-gpu`, your jobs running during the hackathon period (8AM 4/20 to 11PM 4/21) will run in the reserved GPU node. No need to mention reservation explicitly
 
 ## Interactive job submissions
-Use `srunr to allocate an interactive job. This means you use specific options with srun on the command line to tell Slurm what resources you need to run your job, such as number of nodes, amount of memory, and amount of time. After typing your srun command and options on the command line and pressing enter, Slurm will find and then allocate the resources you specified. Depending on what you specified, it can take a few minutes for Slurm to allocate those resources. 
+Use `srun` for interactive jobs. This means you use specific options with srun on the command line to tell Slurm what resources you need to run your job, such as number of nodes, amount of memory, and amount of time. After typing your srun command and options on the command line and pressing enter, Slurm will find and then allocate the resources you specified. Depending on what you specified, it can take a few minutes for Slurm to allocate those resources. 
 
 ### Single node with CPU reservation
-- `srun --account=bbug-delta-cpu --partition=cpu --time=00:30:00 --nodes=1 --mem=0 --reservation=hack-cpu-team1 --pty /bin/bash` .
+- `srun --account=bbug-delta-cpu --partition=cpu --time=00:30:00 --nodes=1 --mem=0 --reservation=hack-cpu-team<num> --cpus-per-task=8 --pty /bin/bash` .
 - This will give you shell access to the compute node
 
 ### Single node with GPU reservation
