@@ -2,6 +2,13 @@
 Some example slurm scripts. Feel free to use these. <br>
 You will just need to reaplce runnable script (instead of `llm.py`) and conda environment (instead of `venv`), if applicable. <br>
 
+## Delta HPC
+- Login `ssh username@login.delta.ncsa.illinois.edu`
+- Type `accounts` to see accounts you are part of.
+- Type `quota` to see your resource limits. Each user has a 50G limit. 
+- Hackathon Account name : bbug. Use `bbug-delta-cpu` for CPU nodes and `bbug-delta-gpu` for GPU nodes
+- See [Delta - How To?](https://docs.google.com/presentation/d/1mHNwGp0Q5nmYJDCRyYZPT7_THEG9VanX/edit#slide=id.p1) presentation for more info
+
 ## Compute node reservations for hackathon
 - 12 CPU-only compute nodes and 1 GPU node (A100x4) will be reserved for the Hackathon.
 - Reservations will start from 8AM 4/20 and will end at 11PM 4/21.
