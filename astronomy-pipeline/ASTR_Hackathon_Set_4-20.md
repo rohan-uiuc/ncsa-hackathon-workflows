@@ -25,7 +25,6 @@ The radiative de-excitation rate is:
 
 $$\left( \frac{dn_i}{dt} \right)_{\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} $$
 
-$$\left( \frac{dn_i}{dt} \right) {\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} $$
 The collisional de-excitation rate is:
 
 $
