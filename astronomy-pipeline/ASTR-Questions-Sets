@@ -7,9 +7,7 @@ Some of these concepts can be rather intensive into astronomy - after all, AI ha
 TASK FOR HACKATHON:
 Find answers for the following questions and subsets. 
 
-## Question #1: Molecular Tracers
-Acknowledge Reference Source: 
-
+## Question #1: Molecular Tracers:
 Prompt your code to return all equations in LaTeX:
 
 Derive a definition of the critical density, and use it to compute some critical densities for important molecular transitions.
@@ -92,6 +90,101 @@ HCN($J=1\rightarrow 0$) & $9.2$ & $0.0013$
 \end{tabular}
 \end{center}
 It appears that CO($J=1\rightarrow 0$) and (to some extent) CO($J=3\rightarrow 2$) are good tracers of the bulk of the mass, while CO($J=5\rightarrow 4$) and HCN($J=1\rightarrow 0$) are better tracers of the denser parts of the cloud.
+
+Question #1 Reference / Citation
+Structure/Source: https://github.com/Open-Astrophysics-Bookshelf/star_formation_notes/blob/master/problems/probset1.tex
+
+~~~~~~~~~~~
+## Question #2: Using Living Online Astronomy Datasets 
+
+Dataset is found here: https://lasp.colorado.edu/lisird/data/tsis_tsi_6hr
+(You will need to click "Download" for the .txt file.)
+
+Background:
+There is currently a outeratmospeheric NASA space mission dedicated to taking routine measurements of stellar flux called the "Total and Spectral Solar Irradiance Sensor"
+
+Question: Using the text file TSIS-1 6-hour mission data return:
+
+- the maximum solar flux
+- minimum flux 
+- average flux value over the last 
+
+Answer the question: Is the assumption that the Sun’s flux is constant over human timescales accurate?
+Question Source: Astronomy 404 Homework, University of Illinois Astronomy Dept. 
+
+~~~~~~~~~~~
+## Question #3: Collapsing Protostellar Core
+
+Situation: Consider a collapsing protostellar core that delivers mass to an accretion disk at its center at a constant mass-change rate $\dot{M}_d$.
+A fraction $f$ of the mass that reaches the disk is ejected (lost) through a jet outflow,
+and the remainder goes onto a protostar at the center of the disk.
+The material ejected into the outflow is launched at a velocity equal to the escape speed from the stellar surface.
+The protostar has a constant radius $R_*$ as it grows.
+
+Question 3a:
+Compute the momentum per unit stellar mass ejected by the outflow in the process of forming a star of final mass $M_$.
+Take $f=0.1$,
+$M_ = 0.5$ $\text{M}\odot$,
+and $R* = 3$ $\text{R}\odot$.
+
+
+Answer 3a:
+The escape speed at the stellar surface, and thus the launch velocity of the wind, is $v_w = \sqrt{2G M_*(t)/R_*}$, where $M_*(t)$ is the star's instantaneous mass. The momentum flux associated with the wind is therefore $\dot{p}_w = f \dot{M}_d v_w$. The accretion rate onto the star is $\dot{M}_* = (1-f) \dot{M}_d$. Thus at a time $t$ after the star has started accreting, we have $M_*(t) = (1-f) \dot{M}_d t$, and
+\begin{displaymath}
+\dot{p}_w = f (1-f)^{1/2} \dot{M}_d^{3/2} \left(\frac{2G}{R_*}\right)^{1/2} t^{1/2}.
+\end{displaymath}
+The time required to accrete up to the star's final mass is $t_f = M_*/\dot{M}_* = (1-f)^{-1} M_*/\dot{M}_d$, where $M_*$ is the final mass. To obtain the wind momentum per unit stellar mass, we must integrate $\dot{p}_w$ over the full time it takes to build up the star, then divide by the star's mass. Thus we have
+\begin{eqnarray*}
+\langle p_w\rangle & = & \frac{1}{M_*} \int_0^{(1-f)^{-1} M_*/\dot{M}_d} f (1-f)^{1/2} \dot{M}_d^{3/2} \left(\frac{2G}{R_*}\right)^{1/2} t^{1/2}\, dt \\
+& = & \frac{2}{3} \frac{f}{1-f} \sqrt{\frac{2 G M_*}{R_*}}.
+\end{eqnarray*}
+
+Evaluating numerically for the given values of $f$, $M_*$, and $R_*$ gives $\langle p_w\rangle = 19$ km s$^{-1}$ $\msun^{-1}$.
+
+
+Question 3b: Considering the outflow's momentum conservation on large scales, relate its terminal velocity to the turbulent velocity dispersion $\sigma$ in the ambient cloud. If the cloud forms a star cluster of mass $M*$ with a constant star formation rate $\dot{M}{\text{cluster}}$, calculate the rate at which outflows inject kinetic energy into the cloud.
+
+Answer 3b:
+    
+Each outflow carries momentum $\langle p_w\rangle M_*$, and thus when it decelerates to terminal velocity $\sigma$ the mass it has swept-up must be $M_w = (\langle p_w\rangle/\sigma) M_*$. The associated kinetic energy of a single outflow is 
+\begin{displaymath}
+\mathcal{T}_w = \frac{1}{2} M_w \sigma^2 = \frac{1}{2} M_* \langle p_w\rangle \sigma.
+\end{displaymath}
+If the total star formation rate is $\dot{M}_{\rm cluster}$, then the rate at which new stars form is $\dot{M}_{\rm cluster}/M_*$. The rate of kinetic energy injection is therefore
+\begin{eqnarray*}
+\dot{\mathcal{T}} & = & \frac{\dot{M}_{\rm cluster}}{M_*} \mathcal{T}_w \\
+& = & \frac{1}{2} \dot{M}_{\rm cluster} \langle p_w\rangle \sigma \\
+& = & \frac{1}{3}\left(\frac{f}{1-f}\right) \dot{M}_{\rm cluster} \sigma \sqrt{\frac{2 G M_*}{R_*}}.
+\end{eqnarray*}
+
+
+Question 3c: Let's apply Larson's relations to the cloud, relating its velocity dispersion, mass, and size.
+Assuming turbulence decays exponentially on a timescale $t{\text{cr}}=L/\sigma$, determine the required star formation rate for energy injected by outflows to balance the energy lost via turbulence decay. Consider $L = 1, 10,$ and $100$ pc.
+
+Answer 3c:
+    
+The decay time is $L/\sigma$, to the decay rate must be the cloud kinetic energy $(3/2) M \sigma^2$ divided by this time. Thus
+\begin{displaymath}
+\dot{\mathcal{T}}_{\rm dec} = -\frac{3}{2} \frac{M \sigma^3}{L}.
+\end{displaymath}
+If we now set $\dot{\mathcal{T}}_w = -\dot{\mathcal{T}}_{\rm dec}$, we can solve for $\dot{M}_{\rm cluster}$. Doing so gives
+\begin{displaymath}
+\dot{M}_{\rm cluster} = \frac{9}{2}\left(\frac{1-f}{f}\right) \sqrt{\frac{R_*}{2 G M_*}} \frac{\sigma^2}{L} M.
+\end{displaymath}
+Using the Larson relations to evaluate this, note that $\sigma^2/L = \sigma_1^2/\mbox{pc} \equiv a_c = 3.2\times 10^{-9}$ cm s$^{-1}$ is constant, and we are left with
+\begin{displaymath}
+\dot{M}_{\rm cluster} = \frac{9}{2}\left(\frac{1-f}{f}\right) \sqrt{\frac{R_*}{2 G M_*}} a_c M_1 \left(\frac{L}{\mbox{pc}}\right)^2.
+\end{displaymath}
+Evaluating numerically for the given values of $L$ produces the results below:
+\begin{center}
+\begin{tabular}{l|ccc}
+& $L=1$ pc & $L = 10$ pc & $L = 100$ pc \\ \hline
+$\dot{M}_{\rm cluster}$ [$\msun$ yr$^{-1}$] & $1.6\times 10^{-5}$ & $1.6\times 10^{-3}$ & $1.6\times 10^{-1}$
+\end{tabular}
+\end{center}
+
+
+d. If stars form at the rate needed to maintain turbulence, what fraction of the cloud mass must convert into stars per cloud free-fall time? Given cloud density $\rho=M/L^3$, compute this fraction for $L = 1,10,$ and $100$ pc. Are these values plausible? When, if ever, is it acceptable to disregard the energy injected by protostellar outflows?
 
 
 
