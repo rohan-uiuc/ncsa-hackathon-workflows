@@ -40,6 +40,9 @@
    - LSST datasets, some tools and some tutorials https://github.com/lsst/dp0-2_lsst_io/tree/main
    - European Org for Astronomical Research Data processing pipeline https://www.eso.org/sci/software/edps.html https://ftp.eso.org/pub/dfs/pipelines/libraries/edps/edps_tutorial0.9.pdf 
 
+6. Astronomy question set
+   - Checkout [astronomy_question_set.md] for astronomy related problem statements
+
 # Accessing LLMs 
 
 ## 1. NCSA-hosted "best of the open source" models
