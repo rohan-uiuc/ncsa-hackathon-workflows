@@ -7,7 +7,6 @@ Some of these concepts can be rather intensive astronomy - after all, AI has pro
 
 TASK FOR HACKATHON:
 Find answers for the following questions and subsets. Some will be to match the provided equation in the LaTeX answer section, and others are to find the same numerical value. Questions are in no particular order for difficulty, so please solve in whichever order you choose.
-$\sqrt{3x-1}+(1+x)^2$
 
 ## Question #1: Molecular Tracers
 Prompt your code to return all equations in LaTeX:
@@ -24,9 +23,9 @@ Answer 1a:
     
 The radiative de-excitation rate is:
 
-$$ \\left(\frac{dn_i}{dt}\right)_{\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} $$
+$$\left( \frac{dn_i}{dt} \right)_{\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} $$
 
-
+$$\left( \frac{dn_i}{dt} \right) {\rm spon.\,emiss.} = -n_i \sum_{j<i} A_{ij} $$
 The collisional de-excitation rate is:
 
 $
