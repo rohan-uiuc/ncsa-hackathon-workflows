@@ -1,4 +1,4 @@
-# Astronomy Question Sets
+ # Astronomy Question Sets
 
 ## Overview
 This is a list of questions for varying difficulty to attempt with your AI system. Some questions require access to online databases, and others to static text files. 
@@ -184,11 +184,133 @@ $\dot{M}_{\rm cluster}$ [$\msun$ yr$^{-1}$] & $1.6\times 10^{-5}$ & $1.6\times 1
 \end{center}
 
 
-d. If stars form at the rate needed to maintain turbulence, what fraction of the cloud mass must convert into stars per cloud free-fall time? Given cloud density $\rho=M/L^3$, compute this fraction for $L = 1,10,$ and $100$ pc. Are these values plausible? When, if ever, is it acceptable to disregard the energy injected by protostellar outflows?
+Question 3d. If stars form at the rate needed to maintain turbulence, what fraction of the cloud mass must convert into stars per cloud free-fall time? Given cloud density $\rho=M/L^3$, compute this fraction for $L = 1,10,$ and $100$ pc. Are these values plausible? When, if ever, is it acceptable to disregard the energy injected by protostellar outflows?
+
+Answer 3d: 
+
+The mass converted into stars in 1 free-fall time is $\dot{M}_{\rm cluster} t_{\rm ff}$, so the quantity we want to compute is
+\begin{displaymath}
+f = \frac{\dot{M}_{\rm cluster}}{M} t_{\rm ff} \equiv \frac{t_{\rm ff}}{t_*},
+\end{displaymath}
+where $t_*$ is the star formation timescale. From the previous part, we have
+\begin{displaymath}
+t_*^{-1} = \frac{\dot{M}_{\rm cluster}}{M} =  \frac{9}{2}\left(\frac{1-f}{f}\right) \sqrt{\frac{R_*}{2 G M_*}} a_c = 0.16\mbox{ Myr}^{-1}.
+\end{displaymath}
+The free-fall time is
+\begin{eqnarray*}
+t_{\rm ff} & = & \sqrt{\frac{3\pi}{32 G \rho}} = \sqrt{\frac{3\pi L^3}{32 G M}} = \sqrt{\frac{3\pi L_1^3}{32 G M_1}} \left(\frac{L}{L_1}\right)^{1/2} \\
+& = & 0.81 \left(\frac{L}{L_1}\right)^{1/2}\mbox{ Myr},
+\end{eqnarray*}
+where $L_1 = 1$ pc. Thus we have
+\begin{displaymath}
+f = \frac{t_{\rm ff}}{t_*} = 0.13 \left(\frac{L}{L_1}\right)^{1/2}.
+\end{displaymath}
+Evaluating for $L = 1$, $10$, and $100$ pc, we get $f = 0.13$, $0.42$, and $1.3$, respectively. We therefore conclude that protostellar outflows may be a significant factor in the driving the turbulence on $\sim 1$ pc scales, and cannot be ignored there. However, they become increasingly less effective at larger size scales, and can probably be neglected at the scales of entire GMCs, $\sim 10-100$ pc.
+
+Source for #3: https://github.com/Open-Astrophysics-Bookshelf/star_formation_notes/blob/master/problems/probsol2.tex
+
+~~~~~~~~~~~~~~~~~
+
+Questions 4 - __ are sourced from / inspired by: 
+
+## Question #4: Light Travel Time
+
+4a. From Earth, how far back in time are we seeing Neptune, when it is furthest from Earth in the two planet's orbits? 
+Give your answer in hours and minutes.
+
+4b. From Earth, how far back in time are we seeing Neptune when it is nearest to earth in the two planets orbits?
+Give your answer in hours and minutes.
+
+Answer 4:
+    a. 4.3 hours, or 260 minutes
+
+    b. 4 hours, or 240 minutes
+
+~~~~~~~~~~~~~
+## Question #5: Conceptual (Mathematics)
+
+Apollo 11 astronauts left Earth's atmosphere at the speed of about 40,000 kilometers per hour on the Saturn V booster, the most powerful rocket ever launched - before or since. At that speed, how long would it take to travel to the moon?
+
+Answer #5: Assuming constant velocity: 
+    Constant: ~10 hours 
+        
+        d = 4 x 10^5 km
+        v = 4 x 10^4 km/h 
+    
+NOTE: The Apollo 11 mission actually took about 3 days to reach the Moon, as the pull of Earths gravity meant that their speed decreased throughout the trip.
+
+~~~~~~~~~~~~
+## Question #6: Conceptual (Reasoning)
+
+Consider whether pulsars could be white dwarfs. A typical white dwarf of one solar mass has a radius of about equal to that of Earth. What would be the speed (in meters per second) of a point on the rotational equator of such a white dwarf, if it were spinning with a period P of 1/600 second.
+Are there any laws of physics that would prevent such speeds?
+
+Answer 6:
+    Equation: is v = 2*pi*r/ P = 2E10 m/s 
+
+    Yes. The speed of light is 3E8 m/s, so it is physically impossible for an object as large as a white dwarf to spin this fast; it would require Lhat its surface
+travel faster than Lhe speed of lighL!
+
+~~~~~~~~~~~~
+## Question #7 Conceptual (Reasoning)
+
+An astronaut sits in the exact middle of his rocket ship and shines dual laser beams towards the front and back. He observed that they reached the front and back simultaneously. If he's moving past you with the speed of 60% light,
+do you see both laser beams hitting the front back of his rocket simultaneously?
+
+Answer #7: 
+    No.
 
 
+~~~~~~~~~~~~
+## Question 8: Conceptual (Mathematics)
+    
+Situation: 
+On September 14th, 2015, the Laser Interferometer Gravitational-Wave Observatory (LIGO) measured the signal for my pair of colliding black holes.
+    The measured signal was a gravitational wave passing by the detector. In essence, LIGO uses lasers to measure very accurately the distance between pairs of mirrors separated by about four kilometers: as a gravitational wave goes by, that distance oscillates periodically by a tiny amount. Just before the two black holes collided, marked the peak of gravitational radiation.
+        
+The period of oscillations was .004 seconds (i.e, the frequency of about 250 Hz, corresponding to the middle C on a piano.) When the two black holes are brought to merge, their event horizons are touching each other, and they are in orbit around each other at close to the speed of light.
+
+Use this information to estimate the mass of the black holes. Assume for simplicity that the two black holes have the same mass.
+Express your answer in solar masses to a single significant figure."
+
+Answer #8:
+The orbit of each black hole is a circle of radius equal to its Schwarzschild radius, and thus the circumference of the orbit is equal to $2\pi$ times that. Its period is that distance divided by the speed of light:
+
+\[ \text{Period} = \frac{0.004 \text{ sec}}{2\pi \times R_{\text{Schwarzchild}}}\]
+
+The speed of light is $300,000$ kilometers per second, and using our usual approximation of $\pi = 3$, this simplifies to:
+
+\[R_{\text{Schwarzchild}} = 200 \text{ kilometers}\]
+
+We know that the Schwarzschild radius corresponding to a solar mass is about $3$ kilometers, and we have a number about $60$ times larger. So each black hole has a mass of $60$ solar masses.
+In fact, a more accurate calculation using the equations of general relativity shows that we're off by a factor of $2$; the two black holes each have a mass of about $30$ solar masses.
+
+~~~~~~~~~~~~
+## Question #9: Concepts
+What is the distance modulus equation?
+
+Answer #9:  \text{Distance Modulus} = m - M = 5 \log_{10} \left( \frac{d}{10 \text{ pc}} \right)
+
+Note to Hacker: there are several forms of this equation. Test your results with numerical values to ensure it matches the equation provided.
 
 
+~~~~~~~~~~~~
+Question #10: Reading Data
+
+Which value on this datafile output cooresponds to Right Acension: 
+
+SURVEY: PS1MD
+SNID:  PSc000174
+IAUC:    UNKNOWN
+RA:         162.0294  deg
+DECL:        56.8502  deg
+MWEBV:  0.0076  +- 0.0000 MW E(B-V)
+REDSHIFT_FINAL:  0.2440  +- 0.0000 CMB
+SEARCH_PEAKMJD: 55212.0
+FILTERS:    griz
+
+Answer #10:
+162.0294  deg
 
 
 
