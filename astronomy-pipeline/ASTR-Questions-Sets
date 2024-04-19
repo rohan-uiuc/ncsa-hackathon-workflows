@@ -313,6 +313,27 @@ Answer #10:
 162.0294  deg
 
 
+## Question 11: Reading LIGO DATA             
+Source: https://gracedb.ligo.org/superevents/public/O4/
+
+Background: Through the GraceDB site, locate "All Significant Events" and disregard retracted events marked in red. 
+Use the Column “Possible Source (Probability)” to return the most likely explaination for the merger signal: 
+                   
+NOTES:
+BBH = a pair of binary black holes
+BNS = a pair of binary neutron stars
+NSBH = a merger of a neutron star with a black hole                                 
+Terrestrial = false alarm
+Probability of each of these events is provided as a percentage.                                              
+                                                            
+Q: In the last 25 entries, again ignoring the retractions, which event type is the most common, BBH, BNS, or NSBH? 
+What is the name of the last significant event to occur?
+
+Answer as of 4/13:
+    S240413p
+    BBH is most common
+
+
 
 
 ## Task for the hackathon
